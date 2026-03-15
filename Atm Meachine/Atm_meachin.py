@@ -5,6 +5,25 @@ def save_data(accounts, PATH):
     with open(PATH, "w") as file:
         json.dump(accounts, file , indent=4)
 
+def delete_account(accounts, PATH):
+    print("\n------ Delete Account ------")
+
+    number = int(input("Enter Account Number: "))
+    pin = int(input("Enter PIN: "))
+
+    if number in accounts and accounts[number]["pin"] == pin:
+        confirm = input("Are you sure you want to delete this account? (yes/no): ")
+
+        if confirm.lower() == "yes":
+            del accounts[number]   # remove account
+            save_data(accounts, PATH)
+            print("Account deleted successfully.")
+        else:
+            print("Deletion cancelled.")
+
+    else:
+        print("Invalid account number or PIN.")
+
 def atm():
     PATH=r"E:\ATM MEACHIN PROJECT\Data/accounts.json.txt"
     # Load accounts from file
@@ -22,9 +41,10 @@ def atm():
         print("2. Withdraw Cash")
         print("3. Deposit Cash")
         print("4. Balance Enquiry")
-        print("5. Exit")
-        
-        A=int(input("Enter here: "))
+        print("5. Delete Account")
+        print("6. Exit")
+        A1=input("Enter here:")
+        A=int(A1)
         if A==1:
             print("Enter your details:")
             Account_name=input("Enter your name: ")
@@ -105,6 +125,8 @@ def atm():
                     else:
                         print("Incorrect PIN")
         elif A==5:
+            delete_account(accounts, PATH)
+        elif A==6:
              break
         else:
              print("Invalid option.")
