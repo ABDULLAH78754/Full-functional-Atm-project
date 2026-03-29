@@ -49,7 +49,13 @@ def atm():
             print("Enter your details:")
             Account_name=input("Enter your name: ")
             age=int(input("Enter your age:"))
-            id_proof=int(input("Enter your Id Number:"))
+            while True:
+                id_proof = input("Enter 12 id_proof: ")
+                if len(id_proof) == 12 and id_proof.isdigit():
+                    id_proof = int(id_proof)
+                    break
+                else:
+                    print("PIN must be exactly 12 digits.")
             account_number = random.randint(100000000000, 999999999999)
             print(F"Your account no: {account_number}")
             while True:
